@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Show Ingredient</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{'/bootstrap-3.3.min.js'}"></script>
+    <link rel="stylesheet" th:href="@{'/bootstrap-3.3.min.css'}">
+</head>
+<body>
+<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" th:text="${ingredient.name}">Ingredient Name Here!</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Type Of Measure:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${ingredient.type}">GRAMS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">Categories that contain this ingredient:</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>View</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tr th:remove="all">
+                                <td>123</td>
+                                <td>Tasty Goodnees 1</td>
+                                <td><a href="#">View</a></td>
+                            </tr>
+                            <tr th:remove="all">
+                                <td>12333</td>
+                                <td>Tasty Goodnees 2</td>
+                                <td><a href="#">View</a></td>
+                            </tr>
+                            <tr th:each="category : ${ingredient.getCategories()}">
+                                <td th:text="${category.getId()}">334</td>
+                                <td th:text="${category.getName()}">Tasty Goodnees 3</td>
+                                <td><a href="#"
+                                       th:href="@{'/ingredient/all?category=' + ${category.getName()}}">View</a></td>
+                                <td><a href="#"
+                                       th:href="@{/ingredient-ingredient-category/delete(categoryId=${category.getId()}, ingredientId=${ingredient.getId()})}">Delete</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <a th:href="@{/ingredient/all}" class="btn btn-dark">Back to Ingredient list</a>
+            <a th:href="@{/}" class="btn btn-dark">Back to The Main Page</a>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

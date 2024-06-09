@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        use_sql_comments: false
+  datasource:
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+api:
+  recommendation:
+    url: "https://ogu43iiu6j.execute-api.eu-central-1.amazonaws.com/default/personalize_lambda"

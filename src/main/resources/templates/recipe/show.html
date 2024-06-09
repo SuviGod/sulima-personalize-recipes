@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Show Recipe</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{'/bootstrap-3.3.min.js'}"></script>
+    <link rel="stylesheet" th:href="@{'/bootstrap-3.3.min.css'}">
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" th:text="${recipe.name}">Recipe Description Here!</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Difficulty:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${recipe.difficulty}">Easy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Description</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p th:text="${recipe.description}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                    elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+                                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                                    nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede
+                                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                    eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                    viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                    ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
+                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
+                                    sit amet adipiscing sem neque sed ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients/new'}" class="btn btn-default">Add Ingredient</a>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Ingredients</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">1 Cup of milk</li>
+                                    <li th:remove="all">1 Teaspoon of chocolate</li>
+                                    <li th:each="contentsIngredient : ${recipe.necessaryAmount}"
+                                        th:text="${(contentsIngredient.amount +
+                                                                    ' ' + contentsIngredient.ingredient.type +
+                                                                    ' - ' + contentsIngredient.ingredient.name)}">1 Teaspoon of
+                                        Sugar
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" th:if="${not #lists.isEmpty(contentsDifference)}">
+                    <div class="col-md-10">
+                        <h2>This is the difference that you need to get:</h2>
+                    </div>
+                </div>
+                <div class="panel panel-default" th:if="${not #lists.isEmpty(contentsDifference)}">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Differences</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>Necessary amount</th>
+                                    <th>Measure</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="difference : ${contentsDifference}">
+                                    <td th:text="${difference.ingredient.name}">Ingredient</td>
+                                    <td th:text="${difference.difference}">Amount</td>
+                                    <td th:text="${difference.ingredient.type}">Type</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <a th:href="@{/recipe/all}" class="btn btn-dark">Back to Browsing Recipes</a>
+                <a th:href="@{/}" class="btn btn-dark">Back Main Menu</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipe Form</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{'/bootstrap-3.3.min.js'}"></script>
+    <link rel="stylesheet" th:href="@{'/bootstrap-3.3.min.css'}">
+</head>
+<body>
+<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${category}" th:action="@{/ingredient-category/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Creating Ingredient Category Form</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Category Name:</label>
+                                    <input type="text" class="form-control" th:field="*{name}"/>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Choose ingredients to add:</label>
+                                <select id="ingredients" class="form-control" filter="true" multiple="multiple"
+                                        th:field="*{ingredients}"/>
+                                <option th:each="ingredient : ${allIngredients}"
+                                        th:value="${{ingredient.id}}"
+                                        th:text="${ingredient.name}">
+                                    Milky
+                                </option>
+
+                                <option th:remove="all">Fruits</option>
+                                <option th:remove="all">vegetables</option>
+                                <option th:remove="all">sweet</option>
+                                </select>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <input th:type="submit" class="btn btn-primary" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

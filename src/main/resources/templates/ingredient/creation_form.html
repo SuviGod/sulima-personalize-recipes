@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipe Form</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{'/bootstrap-3.3.min.js'}"></script>
+    <link rel="stylesheet" th:href="@{'/bootstrap-3.3.min.css'}">
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${ingredient}" th:action="@{/ingredient/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Add Ingredient Form</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Ingredient Name:</label>
+                                    <input type="text" class="form-control" th:field="*{name}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Measure type:</label>
+                                    <select class="form-control" th:field="*{type}"/>
+                                    <option>SPOONS</option>
+                                    <option>GRAMS</option>
+                                    <option>LITERS</option>
+                                    <option>POINTS</option>
+                                    <option>TEASPOONS</option>
+                                    <option>KILOGRAMS</option>
+                                    <option>CUPS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Choose categories to add:</label>
+                                    <select id="categories" class="form-control" filter="true" multiple="multiple"
+                                            th:field="*{categories}"/>
+                                    <option th:each="category : ${allCategories}"
+                                            th:value="${{category.id}}"
+                                            th:text="${category.name}">
+                                        Milky
+                                    </option>
+
+                                    <option th:remove="all">Fruits</option>
+                                    <option th:remove="all">vegetables</option>
+                                    <option th:remove="all">sweet</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input th:type="submit" class="btn btn-primary" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

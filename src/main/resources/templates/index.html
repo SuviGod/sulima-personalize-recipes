@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{'/bootstrap-3.3.min.js'}"></script>
+    <link rel="stylesheet" th:href="@{'/bootstrap-3.3.min.css'}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Recipe book</h1>
+        <div class="row" style="margin-top: 10px;">
+            <a href="" th:href="@{/recipe/all}">
+                <div class="col-xs-6 col-md-3 thumbnail align-items-center" style="width: 200px; height: 150px; margin: 30px;">
+                    <h2>Recipes</h2>
+                </div>
+            </a>
+            <a href="#" th:href="@{/ingredient/all}">
+                <div class="col-xs-6 col-md-3 thumbnail align-items-center" style="width: 200px; height: 150px; margin: 30px;">
+                    <h2>Ingredients</h2>
+                </div>
+            </a>
+            <a href="#" th:href="@{/me}">
+                <div class="col-xs-6 col-md-3 thumbnail align-items-center" style="width: 200px; height: 150px; margin: 30px;">
+                    <h2>Profile</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

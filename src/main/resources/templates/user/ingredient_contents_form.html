@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Adding ingredients list</title>
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <script th:src="@{/bootstrap-3.3.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.min.css}">
+</head>
+<body>
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${content}" th:action="@{'/me/' + ${user.id} + '/ingredients/new'}" method="post">
+                <input type="hidden" name="id" th:value="*{id}">
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-heading">
+                                <label class="col-sm-2 control-label" th:text="${'User: ' + user.name}">User:</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <select th:field="*{ingredient}">
+                                        <option th:each="listingIngredient : ${ingredients}" th:value="${listingIngredient.id}"
+                                                th:text="${listingIngredient.name}">apple</option>
+                                    </select>
+                                    <input type="number" th:field="*{amount}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
